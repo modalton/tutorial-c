@@ -2,13 +2,13 @@ base: ubuntu:16.04
 setup: # global setup steps here
 environment: # global env vars here
 targets:
-- name: example
+- name: tutorial
   language: c++
   setup:
-    - $FUZZ_CXX $CXXFLAGS -c ./example/api.h ./example/api.cpp
-    - $FUZZ_CXX $CXXFLAGS ./api.o ./example/harness.cpp -lFuzzingEngine -o ./target
+    - $FUZZ_CXX $CXXFLAGS -c ./api.h ./api.cpp
+    - $FUZZ_CXX $CXXFLAGS ./api.o ./harness.cpp $FUZZ_ENGINE -o ./target
   harness: 
     binary: ./target
   sanitizers:
     address: detect_stack_use_after_return=1
-  corpus: ./example/corpus
+  corpus: ./corpus
