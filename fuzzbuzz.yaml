@@ -1,14 +1,9 @@
-base: ubuntu:16.04
-setup: # global setup steps here
-environment: # global env vars here
-targets:
-- name: tutorial
+base:
   language: c++
-  setup:
-    - $FUZZ_CXX $CXXFLAGS -c ./api.h ./api.cpp
-    - $FUZZ_CXX $CXXFLAGS ./api.o ./harness.cpp $FUZZ_ENGINE -o ./target
-  harness: 
-    binary: ./target
+  steps:
+    - run: $CXX $CXXFLAGS -c ./api.h ./api.cpp
+    - run: $CXX $CXXFLAGS ./api.o ./harness.cpp $LIB_FUZZING_ENGINE -o $OUT/broken_method_fuzzer
   sanitizers:
-    address: detect_stack_use_after_return=1
-  corpus: ./corpus
+    - address:
+    - undefined:
+    - thread:
