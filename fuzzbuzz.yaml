@@ -1,9 +1,10 @@
+ 
 base:
   language: c++
+  engine: libFuzzer 
   steps:
     - run: $CXX $CXXFLAGS -c ./api.h ./api.cpp
-    - run: $CXX $CXXFLAGS ./api.o ./harness.cpp $LIB_FUZZING_ENGINE -o $OUT/broken_method_fuzzer
+    - run: $CXX $CXXFLAGS ./api.o ./harness.cpp $LIB_FUZZING_ENGINE -o broken_method_fuzzer
   sanitizers:
-    - address:
-    - undefined:
-    - thread:
+    address: {}
+    undefined: {}
