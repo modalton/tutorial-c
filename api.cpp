@@ -3,6 +3,7 @@
 
 #include <vector>
 
+// bigtex
 // Do some computations with 'str', return the result.
 // This function contains a bug. Can you spot it?
 size_t BrokenMethod(const std::string &str) {
